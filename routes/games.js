@@ -4,7 +4,7 @@ const mysql = require('../mysql').pool;
 const bcrypt = require('bcrypt');
 const { authRole, ROLE } = require('../middleware/authRoles');
 
-router.get('/', authRole([ROLE.ALL]), (req, res, next) => {
+router.get('/', (req, res, next) => {
     const games = [];
 
     mysql.getConnection((error, conn) => {
