@@ -1,0 +1,25 @@
+CREATE TABLE games (
+	idGame INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    name VARCHAR(64) NOT NULL,
+    tier VARCHAR(10) NOT NULL,
+    descriptionText TEXT NULL,
+    platform (16) NOT NULL,
+    image VARCAHR(64) NULL
+);
+
+CREATE TABLE users (
+	idUser INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    name VARCHAR(32) NOT NULL,
+    email VARCHAR(64) NOT NULL UNIQUE,
+   	password VARCHAR(256) NOT NULL,
+    role VARCHAR(16) NULL DEFAULT 'user'
+);
+
+CREATE TABLE gamesPopularity (
+	idGamePopularity INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    rate BOOLEAN NOT NULL,
+    idGame INT NOT NULL,
+    idUser INT NOT NULL,
+    CONSTRAINT FK_GamesPopularityUsers FOREIGN KEY (idUser) REFERENCES users(idUser),
+    CONSTRAINT FK_GamesPopularityGames FOREIGN KEY (idGame) REFERENCES games(idGame)
+)
