@@ -115,6 +115,7 @@ router.post('/', (req, res, next) => {
         idUser: null,
         name: req.body.name,
         email: req.body.email,
+        password: req.body.password
     });
 
     mysql.getConnection((error, conn) => {
@@ -129,10 +130,9 @@ router.post('/', (req, res, next) => {
     
                     conn.query(
                         'INSERT INTO `users` (`idUser`, `name`, `email`, `password`) VALUES (NULL, ?, ?, ?);',
-                        [user[0].name, user[0].email, hash],
+                        [user[0].name, user[0].email, user[0].password, hash],
                         (error, resultado, field) => {
                             conn.release();
-                            console.log("D");
                             if(error){return res.status(500).send({ error: error})};
     
                             user[0].idUser = resultado.insertId;
