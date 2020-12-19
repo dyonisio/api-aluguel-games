@@ -118,16 +118,13 @@ router.post('/', (req, res, next) => {
     });
 
     mysql.getConnection((error, conn) => {
-        console.log("A");
         if(error){return res.status(500).send({ error: error})};
         conn.query('SELECT * FROM users WHERE email = ?',[req.body.email], (error, resultado) => {
-            console.log("B");
             if(error){return res.status(500).send({ error: error})};
             if(resultado.length > 0){
                 res.status(409).send({ error: 'EMAIL já utilizado'})
             } else {
-                bcrypt.hash(req.body.senha, 10, (errBcrypt, hash) => {
-                    console.log("c");
+                bcrypt.hash(req.body.password, 10, (errBcrypt, hash) => {
                     if(errBcrypt){return res.status(500).send({ error: "errBcrypt" })}
     
                     conn.query(
