@@ -113,7 +113,7 @@ router.post('/', (req, res, next) => {
     const user = []
     user.push({
         idUser: null,
-        name: req.body.name,
+        username: req.body.name,
         email: req.body.email,
         password: req.body.password
     });
@@ -130,7 +130,7 @@ router.post('/', (req, res, next) => {
     
                     conn.query(
                         'INSERT INTO `users` (`idUser`, `name`, `email`, `password`) VALUES (NULL, ?, ?, ?);',
-                        [user[0].name, user[0].email, user[0].password, hash],
+                        [user[0].username, user[0].email, user[0].password, hash],
                         (error, resultado, field) => {
                             conn.release();
                             if(error){return res.status(500).send({ error: error})};
