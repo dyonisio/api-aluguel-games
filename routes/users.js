@@ -128,7 +128,7 @@ router.post('/', (req, res, next) => {
             } else {
                 bcrypt.hash(req.body.senha, 10, (errBcrypt, hash) => {
                     console.log("c");
-                    if(errBcrypt){return res.status(500).send({ error: errBcrypt })}
+                    if(errBcrypt){return res.status(500).send({ error: "errBcrypt" })}
     
                     conn.query(
                         'INSERT INTO `users` (`idUser`, `name`, `email`, `password`) VALUES (NULL, ?, ?, ?);',
