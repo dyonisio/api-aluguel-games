@@ -113,7 +113,7 @@ router.post('/', (req, res, next) => {
     const user = []
     user.push({
         idUser: null,
-        username: req.body.name,
+        username: req.body.username,
         email: req.body.email,
         password: req.body.password
     });
